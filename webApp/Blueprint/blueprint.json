@@ -1,0 +1,19 @@
+{
+    "properties": {
+        "targetScope": "subscription",
+        "parameters": {
+            "BlueprintParameter_AppServicePlan_Name": {
+                "type": "string"
+            },
+            "BlueprintParameter_WebApp_Name": {
+                "type": "string"
+            }
+        },
+        "resourceGroups": {
+            "WEB-APP-RG": {
+                "location": "Norway East"
+            }
+        }
+    },
+    "type": "Microsoft.Blueprint/blueprints"
+}

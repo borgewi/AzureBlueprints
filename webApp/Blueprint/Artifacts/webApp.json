@@ -1,0 +1,55 @@
+{
+    "kind": "template",
+    "properties": {
+        "template": {
+            "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+            "contentVersion": "1.0.0.0",
+            "parameters": {
+                "appServiceName": {
+                    "type": "String"
+                },
+                "appServicePlanName": {
+                    "type": "String"
+                }
+            },
+            "resources": [
+                {
+                    "type": "Microsoft.Web/sites",
+                    "apiVersion": "2018-11-01",
+                    "name": "[parameters('appServiceName')]",
+                    "location": "Norway East",
+                    "kind": "app",
+                    "properties": {
+                        "enabled": true,
+                        "hostNameSslStates": [
+                            {
+                                "name": "[concat(parameters('appServiceName'), '.azurewebsites.net')]",
+                                "sslState": "Disabled",
+                                "hostType": "Standard"
+                            },
+                            {
+                                "name": "[concat(parameters('appServiceName'), '.scm.azurewebsites.net')]",
+                                "sslState": "Disabled",
+                                "hostType": "Repository"
+                            }
+                        ],
+                        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]"
+                    }
+                }
+            ]
+        },
+        "resourceGroup": "WEB-APP-RG",
+        "parameters": {
+            "appServiceName": {
+                "value": "[parameters('BlueprintParameter_WebApp_Name')]"
+            },
+            "appServicePlanName": {
+                "value": "[parameters('BlueprintParameter_AppServicePlan_Name')]"
+            }
+        },
+        "dependsOn": [
+            "appServicePlan"
+        ]
+    },
+    "type": "Microsoft.Blueprint/blueprints/artifacts"
+}

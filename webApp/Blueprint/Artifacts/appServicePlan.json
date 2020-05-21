@@ -1,0 +1,37 @@
+{
+    "kind": "template",
+    "properties": {
+        "template": {
+            "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+            "contentVersion": "1.0.0.0",
+            "parameters": {
+                "appServicePlanName": {
+                    "type": "String"
+                }
+            },
+            "resources": [
+                {
+                    "type": "Microsoft.Web/serverfarms",
+                    "apiVersion": "2018-02-01",
+                    "name": "[parameters('appServicePlanName')]",
+                    "location": "Norway East",
+                    "sku": {
+                        "name": "S1",
+                        "tier": "Standard",
+                        "size": "S1",
+                        "family": "S",
+                        "capacity": 1
+                    },
+                    "kind": "app"
+                }
+            ]
+        },
+        "resourceGroup": "WEB-APP-RG",
+        "parameters": {            
+            "appServicePlanName":{
+                "value": "[parameters('BlueprintParameter_AppServicePlan_Name')]"
+            }
+        }
+    },
+    "type": "Microsoft.Blueprint/blueprints/artifacts"
+}
